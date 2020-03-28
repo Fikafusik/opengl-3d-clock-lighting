@@ -131,6 +131,7 @@ public class ClockRenderer implements GLEventListener {
             drawAxis(gl);
         }
 
+
         float[] no_specular = { 0.0f, 0.0f, 0.0f, 1.0f };
         float[] mat_specular = { 1.0f, 1.0f, 1.0f, 1.0f };
 
@@ -139,22 +140,15 @@ public class ClockRenderer implements GLEventListener {
         float[] mat_diffuse3 = { 0.8f, 0.5f, 0.3f, 1.0f };
         float[] mat_diffuse4 = { 0.0f, 0.0f, 0.0f, 1.0f };
 
-        float[] mat_ambient1 = { 0.1f, 0.1f, 0.1f, 1.0f };
-        float[] mat_ambient2 = { 1.0f, 0.8f, 0.1f, 1.0f };
-
-        float[] no_ambient = { 0.2f, 0.2f, 0.2f, 1.0f };
-
         gl.glMaterialf(GL.GL_FRONT, GL2.GL_SHININESS, 100.0f);
 
         gl.glMaterialfv(GL.GL_FRONT, GL2.GL_DIFFUSE, mat_diffuse1, 0);
         gl.glMaterialfv(GL.GL_FRONT, GL2.GL_SPECULAR, mat_specular, 0);
-        gl.glMaterialfv(GL.GL_FRONT, GL2.GL_AMBIENT, no_ambient, 0);
 
         drawFace(gl);
 
         gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL2.GL_DIFFUSE, mat_diffuse2, 0);
         gl.glMaterialfv(GL.GL_FRONT, GL2.GL_SPECULAR, mat_specular, 0);
-        gl.glMaterialfv(GL.GL_FRONT, GL2.GL_AMBIENT, no_ambient, 0);
 
         drawButton(gl);
 
@@ -162,7 +156,6 @@ public class ClockRenderer implements GLEventListener {
 
         gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL2.GL_DIFFUSE, mat_diffuse3, 0);
         gl.glMaterialfv(GL.GL_FRONT, GL2.GL_SPECULAR, no_specular, 0);
-        gl.glMaterialfv(GL.GL_FRONT, GL2.GL_AMBIENT, no_ambient, 0);
 
         drawBox(gl);
         drawTape(gl, 0.0, 0.0, -0.5, 0.5, 1.0, 0.0, Math.PI, triangulationDegree);
@@ -172,13 +165,9 @@ public class ClockRenderer implements GLEventListener {
 
         gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL2.GL_DIFFUSE, mat_diffuse4, 0);
         gl.glMaterialfv(GL.GL_FRONT, GL2.GL_SPECULAR, no_specular, 0);
-        gl.glMaterialfv(GL.GL_FRONT, GL2.GL_AMBIENT, no_ambient, 0);
 
         drawRisks(gl);
         drawClockHands(gl);
-
-        float[] lightModelAmbient = { 0.8f, 0.2f, 0.2f, 0.3f };
-        gl.glLightModelfv(GL2.GL_LIGHT_MODEL_AMBIENT, lightModelAmbient, 0);
 
         float[] positionLight = { 0.0f, 1.0f, 2.0f, 1.0f };
         gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_POSITION, positionLight, 0);
@@ -186,11 +175,15 @@ public class ClockRenderer implements GLEventListener {
         float[] directionLight = { 0.0f, -1.0f, -2.0f };
         gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_SPOT_DIRECTION, directionLight, 0);
 
-        float[] ambientLight = { 0.4f, 0.f, 0.f, 0.0f };  // weak RED ambient
+        float[] ambientLight = { 0.4f, 0.f, 0.f, 0.0f };
         gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_AMBIENT, ambientLight, 0);
 
-        gl.glLightf(GL2.GL_LIGHT0, GL2.GL_SPOT_CUTOFF, 45.0f);// угол пропускания - 45
-        gl.glLightf(GL2.GL_LIGHT0, GL2.GL_SPOT_EXPONENT,0.0f);// значение Е
+        gl.glLightf(GL2.GL_LIGHT0, GL2.GL_SPOT_EXPONENT,0.0f);
+
+        gl.glLightf(GL2.GL_LIGHT0, GL2.GL_SPOT_CUTOFF, 45.0f);
+
+        float[] lightModelAmbient = { 0.8f, 0.2f, 0.2f, 0.3f };
+        gl.glLightModelfv(GL2.GL_LIGHT_MODEL_AMBIENT, lightModelAmbient, 0);
 
         gl.glPopMatrix();
     }
